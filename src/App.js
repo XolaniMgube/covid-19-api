@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
-import Todos from './components/Todos';
-
 import './App.css';
 
 class App extends Component {
 
   state = {
-    todos: [
-      {
-        id: 1,
-        title: 'Take out trash',
-        completed: false
-      },
-      {
-        id: 2,
-        title: 'Dinner with wife',
-        completed: false
-      },
-      {
-        id: 3,
-        title: 'Meeting with Boss',
-        completed: false
-      }
-    ]
+    loading: true,
+    person: null
+  }
+
+  async componentDidMount() {
+    // const url = "https://api.randomuser.me/";
+    const url2 = "https://api.covid19api.com/summary";
+    const response = await fetch(url2);
+    const data = await response.json()
+    this.setState({person: data.Countries[154], loading: false})
+    console.log(data.Countries[154])
   }
 
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} />
+       {this.state.loading || !this.state.person ? (
+        <div>loading...</div>    
+      ) : (
+        <div>
+          <div>{this.state.person.Country}</div>
+          <div>{this.state.person.NewConfirmed}</div>
+          <div>{this.state.person.TotalConfirmed}</div>
+          <div>{this.state.person.Date}</div>
+        </div>
+      )}
       </div>
     );
   }
