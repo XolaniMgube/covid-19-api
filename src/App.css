@@ -5,6 +5,7 @@
 }
 
 body {
+  width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
 }
@@ -13,3 +14,75 @@ a {
   color: #333;
   text-decoration: none;
 }
+
+h3{
+  font-size: 11pt;
+}
+
+h5{
+  font-size: 8pt;
+}
+
+
+p{
+  font-size: 10pt;
+}
+
+.sections .conditionTrue{
+  background-color: #f0fff7;
+  padding: 15px 0px 15px 50px;
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: 40px 80px 100px 100px;
+  grid-template-areas:
+    "menu        menu       menu" 
+    "header      header     header"
+    "tConfirmed  tRecovered tDeaths"
+    "nConfirmed  nRecovered nDeaths"
+    ;
+}
+
+select{
+  grid-area: menu;
+}
+
+header{
+  grid-area: header;
+  justify-self: center;
+}
+
+.totalConfirmed{
+  grid-area: tConfirmed;
+}
+
+.sections div section div{
+  display: block;
+  font-weight: bold;
+}
+
+.sections div section div.bigNumber{
+  font-size: 25pt;
+}
+
+.sections div section div.smallNumber{
+  font-size: 15pt;
+}
+
+.sections div section div.one{
+  color: brown;
+}
+
+.sections div section div.two{
+  color: green;
+}
+
+.sections div section div.three{
+  color: red;
+}
+
+
+
+
+
+
+
