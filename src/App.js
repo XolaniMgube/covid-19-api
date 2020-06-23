@@ -1,83 +1,82 @@
 import React, { Component } from 'react';
 import './App.css';
-// import Menu from './components/Menu'
-import MenuList from './Menulist'
 
 class App extends Component {
+  
+  // For events and setState on getCountryData function
+  constructor(props) {
+    super(props);
+    this.getCountryData = this.getCountryData.bind(this);
+  }
 
   state = {
-    loading: true,
-    countryObjects: null,
-    individualCountry: null
+    listOfCountries: [],
+    testConfirmed: 0
   }
 
   async componentDidMount() {
     const url = "https://api.covid19api.com/summary";
     const response = await fetch(url);
-    const data = await response.json()
+    const data = await response.json();
+
+    const listOfCountries = data.Countries.map((value) => {
+      return value.Country
+    })
 
     this.setState({
-      countryObjects: data.Countries,
-      loading: false,
-      individualCountry: data.Countries[154]
+      listOfCountries
     })
   }
 
+
+  async getCountryData(e) {
+    const url = `https://api.covid19api.com/total/dayone/country/${e.target.value}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    this.setState({
+      testConfirmed: data[data.length - 1]
+    })
+  }
+
+
+  // displays countries in dropdown
+  renderCountryOptions() {
+    return this.state.listOfCountries.map((country, i) => {
+      return <option key={i}>{country}</option>
+    })
+  }
+
+
   render() {
-    return (
-      
-      <div className="sections">
-      {/* <Menu /> */}
-      
-       {this.state.loading || !this.state.countryObjects || !this.state.individualCountry ? (
-        <div>loading...</div>    
-      ) : (
-        <div className="conditionTrue">
+    return ( 
+      <div className="app">  
+          <div className="menu">
+            <select onChange={this.getCountryData}>
+              <option>Choose country</option>
+              {this.renderCountryOptions()}
+            </select>
+          </div>
 
-        <div className="menu">
-          <ul>
-            <MenuList />
-          </ul>
-        </div>
+          <header className="header">
+            <h1>{this.state.testConfirmed.Country}</h1>
+            <p>{this.state.testConfirmed.Date}</p>
+          </header>
+            
+          <section className="totalConfirmed">
+            <h3>CONFIRMED CASES</h3>
+            <div className="bigNumber one">{this.state.testConfirmed.Confirmed}</div>
+          </section>
 
-        <header className="header">
-          <h1>{this.state.individualCountry.Country}</h1>
-          <p>{this.state.individualCountry.Date}</p>
-        </header>
-          
+          <section className="totalRecovered">
+            <h3>RECOVERED CASES</h3>
+            <div className="bigNumber two"> {this.state.testConfirmed.Recovered}</div>
+          </section>
 
-        <section className="totalConfirmed">
-          <h3>TOTAL CONFIRMED</h3>
-          <div className="bigNumber one">{this.state.individualCountry.TotalConfirmed}</div>
-        </section>
-
-        <section className="totalRecovered">
-          <h3>TOTAL RECOVERED</h3>
-          <div className="bigNumber two"> {this.state.individualCountry.TotalRecovered}</div>
-        </section>
-
-        <section className="totalDeaths">
-          <h3>TOTAL DEATHS</h3>
-          <div className="bigNumber three"> {this.state.individualCountry.TotalDeaths}</div>
-        </section>
-          
-        <section className="newConfirmed">
-          <h5>NEW CONFIRMED</h5>
-          <div className="smallNumber one">{this.state.individualCountry.NewConfirmed}</div>
-        </section>
-
-        <section className="newRecovered">
-          <h5>NEW RECOVERED</h5>
-          <div className="smallNumber two">{this.state.individualCountry.NewRecovered}</div>
-        </section>
-
-        <section className="newDeaths">
-          <h5>NEW DEATHS</h5>
-          <div className="smallNumber three">{this.state.individualCountry.NewDeaths}</div>
-        </section>
-          
-        </div>
-      )}
+          <section className="totalDeaths">
+            <h3>DEATHS</h3>
+            <div className="bigNumber three"> {this.state.testConfirmed.Deaths}</div>
+          </section>
       </div>
     );
   }
