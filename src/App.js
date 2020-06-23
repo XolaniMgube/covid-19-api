@@ -11,9 +11,10 @@ class App extends Component {
 
   state = {
     listOfCountries: [],
-    testConfirmed: 0
+    results: 0
   }
 
+  // pulling all countries data and filtering only the name of countries
   async componentDidMount() {
     const url = "https://api.covid19api.com/summary";
     const response = await fetch(url);
@@ -29,13 +30,15 @@ class App extends Component {
   }
 
 
+  // pulling data filtered by the name of the country we select from the menu
+  // then returning a summary of the latest summary data for that country
   async getCountryData(e) {
     const url = `https://api.covid19api.com/total/dayone/country/${e.target.value}`;
     const response = await fetch(url);
     const data = await response.json();
 
     this.setState({
-      testConfirmed: data[data.length - 1]
+      results: data[data.length - 1]
     })
   }
 
@@ -59,23 +62,23 @@ class App extends Component {
           </div>
 
           <header className="header">
-            <h1>{this.state.testConfirmed.Country}</h1>
-            <p>{this.state.testConfirmed.Date}</p>
+            <h1>{this.state.results.Country}</h1>
+            <p>{this.state.results.Date}</p>
           </header>
             
           <section className="totalConfirmed">
             <h3>CONFIRMED CASES</h3>
-            <div className="bigNumber one">{this.state.testConfirmed.Confirmed}</div>
+            <div className="bigNumber one">{this.state.results.Confirmed}</div>
           </section>
 
           <section className="totalRecovered">
             <h3>RECOVERED CASES</h3>
-            <div className="bigNumber two"> {this.state.testConfirmed.Recovered}</div>
+            <div className="bigNumber two"> {this.state.results.Recovered}</div>
           </section>
 
           <section className="totalDeaths">
             <h3>DEATHS</h3>
-            <div className="bigNumber three"> {this.state.testConfirmed.Deaths}</div>
+            <div className="bigNumber three"> {this.state.results.Deaths}</div>
           </section>
       </div>
     );
