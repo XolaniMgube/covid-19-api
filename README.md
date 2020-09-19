@@ -50,3 +50,6 @@ An Image of how the interface looks...
 - ```react js``` - The framewoork used to develop this is **react**
 
 - ```ejs``` - it was used to develop the structure of the application in order to encoperate **js** in **html***
+
+
+https://github.com/XolaniMgube/covid-19-api#readme
