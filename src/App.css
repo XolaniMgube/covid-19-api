@@ -8,6 +8,7 @@ body {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
+  background-color: #a3d1d1;
 }
 
 a {
@@ -15,80 +16,27 @@ a {
   text-decoration: none;
 }
 
+h1{
+  text-align: center;
+}
+
 h3{
   font-size: 11pt;
 }
-
-h5{
-  font-size: 8pt;
-}
-
 
 p{
   font-size: 10pt;
 }
 
-.app {
-  background-color: #f0fff7;
-  padding: 15px 0px 15px 50px;
-  display: grid;
-  grid-template-columns: 200px 200px 200px;
-  grid-template-rows: 40px 80px 100px;
-  grid-template-areas:
-    "menu        menu       menu" 
-    "header      header     header"
-    "tConfirmed  tRecovered tDeaths"
-    ;
-}
-
-.menu{
-  grid-area: menu;
-  justify-self: center;
-}
-
-.menu select{
-  height: 40px;
-  font-size: 12pt;
-  font-weight: bold;
+.app{
+  width: 850px;
+  margin: 0 auto;
 }
 
 header{
-  grid-area: header;
-  justify-self: center;
+  background: url("./images/background-img-wide.png") no-repeat 0px 80px;
 }
 
-.totalConfirmed{
-  grid-area: tConfirmed;
-}
-
-.app section div{
-  display: block;
-  font-weight: bold;
-}
-
-.app section div.bigNumber{
-  font-size: 25pt;
-}
-
-.app section div.smallNumber{
-  font-size: 15pt;
-}
-
-.app section div.one{
-  color: brown;
-}
-
-.app section div.two{
-  color: green;
-}
-
-.app section div.three{
-  color: red;
-}
-
-.app section {
-  text-align: center;
-}
 
 
 

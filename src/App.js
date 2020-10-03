@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import Sanitizer from './images/sanitizer.png'
+import Piechart from './images/piechart.png'
 
 class App extends Component {
   
@@ -36,6 +38,7 @@ class App extends Component {
     const url = `https://api.covid19api.com/total/dayone/country/${e.target.value}`;
     const response = await fetch(url);
     const data = await response.json();
+    
 
     this.setState({
       results: data[data.length - 1]
@@ -53,35 +56,46 @@ class App extends Component {
 
   render() {
     return ( 
-      <div className="app">  
-          <div className="menu">
+      <div className="app">
+
+        <header>
+          <h1>TOTAL CORONA</h1>
+          <img src={Sanitizer} alt="sanitizer" />
+        </header>
+
+        <div className="page">
+
+          <div className="select-section">
             <select onChange={this.getCountryData}>
               <option>Choose country</option>
               {this.renderCountryOptions()}
             </select>
           </div>
 
-          <header className="header">
-            <h1>{this.state.results.Country}</h1>
-            <p>{this.state.results.Date}</p>
-          </header>
-            
-          <section className="totalConfirmed">
-            <h3>CONFIRMED CASES</h3>
-            <div className="bigNumber one">{this.state.results.Confirmed}</div>
-          </section>
+          <div className="piechart-section">
+            <img src={Piechart} alt="piechart" />
+          </div>
 
-          <section className="totalRecovered">
-            <h3>RECOVERED CASES</h3>
-            <div className="bigNumber two"> {this.state.results.Recovered}</div>
-          </section>
+          <div className="stats-section">
+            <section className="totalConfirmed">
+              <h3>CONFIRMED CASES</h3>
+              <div className="bigNumber one">{this.state.results.Confirmed}</div>
+            </section>
 
-          <section className="totalDeaths">
-            <h3>DEATHS</h3>
-            <div className="bigNumber three"> {this.state.results.Deaths}</div>
-          </section>
+            <section className="totalRecovered">
+              <h3>RECOVERED CASES</h3>
+              <div className="bigNumber two"> {this.state.results.Recovered}</div>
+            </section>
+
+            <section className="totalDeaths">
+              <h3>DEATHS</h3>
+              <div className="bigNumber three"> {this.state.results.Deaths}</div>
+            </section>
+          </div>
+
+        </div>
       </div>
-    );
+    ); 
   }
 }
 
