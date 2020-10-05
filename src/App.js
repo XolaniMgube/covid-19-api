@@ -60,7 +60,7 @@ class App extends Component {
 
         <header>
           <h1>TOTAL CORONA</h1>
-          <img src={Sanitizer} alt="sanitizer" />
+          <img className="sanitizer" src={Sanitizer} alt="sanitizer" />
         </header>
 
         <div className="page">
