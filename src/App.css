@@ -8,7 +8,7 @@ body {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
-  background-color: #a3d1d1;
+  background-color: #fff;
 }
 
 a {
@@ -18,6 +18,11 @@ a {
 
 h1{
   text-align: center;
+  grid-area: heading;
+  font-size: 28px;
+  font-weight: bold;
+  align-self: center;
+  color: #165895;
 }
 
 h3{
@@ -29,15 +34,139 @@ p{
 }
 
 .app{
-  width: 850px;
+  width: 60%;
+  max-width: 849px;
   margin: 0 auto;
+  background-color: #a3d1d1;
+  height: 100vh;
 }
+
+
 
 header{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 65px 210px;
+  grid-template-areas: 
+    "heading   heading"
+    "face       sanitizer"
+    ;
   background: url("./images/background-img-wide.png") no-repeat 0px 80px;
+
 }
 
+header img{
+  width: 110px;
+  grid-area: sanitizer;
+  padding-top: 20px
+}
 
+.page{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 4fr;
+  grid-template-areas: 
+  "options    stats"
+  "piechart   stats"
+  ;
+  justify-items: center;
+  padding-top: 60px;
+}
+
+.select-section{
+  grid-area: options;
+}
+
+.select-section select{
+  background-color: #3daddf;
+  color: white;
+  font-size: 13px;
+  padding: 10px 0px 10px 5px; 
+  text-transform: uppercase;
+  width: 220px;
+  font-weight: bold;
+  border: 2px solid #165895;
+}
+
+.piechart-section{
+  grid-area: piechart;
+}
+
+.piechart-section img{
+  width: 250px;
+}
+
+.stats-section{
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: 270px;
+  grid-template-rows: 110px 110px 110px;
+  border: 2px solid #3daddf;
+  justify-items: center;  
+  background-color: white;
+}
+
+.stats-section section{
+  padding-top: 20px;
+  border-bottom: 2px solid #3daddf;
+  width: 270px;
+  text-align: center;
+}
+
+.stats-section section:last-child{
+  border: 0;
+}
+
+section div{
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.totalConfirmed div{
+  color: #e87416;
+}
+
+.totalRecovered div{
+  color: #32b356;
+}
+
+.totalDeaths div{
+  color: #ff4141;
+}
+
+@media only screen and (max-width: 1000px){
+  .app{
+    width: 100%;
+  }
+
+  header{
+    grid-template-columns: 1fr;
+    grid-template-rows: 65px 230px;
+    grid-template-areas: 
+      "heading"
+      "sanitizer"
+      ;
+    background: url("./images/background-img-mobile.png") no-repeat 0px 80px;
+  }
+
+  header img{
+    width: 150px;
+    padding: 20px 20px 0 0;
+    justify-self: end;
+  }
+
+  .page{
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 330px 4fr;
+    grid-template-areas: 
+    "options"
+    "stats"
+    "piechart"
+    ;
+    padding-top: 40px;
+  }
+
+}
 
 
 
